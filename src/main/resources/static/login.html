@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="Login.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="wrapper">
+        <form id="login-form" method="POST">
+            <h1>Login</h1>
+
+            <!-- Email Input -->
+            <div class="input-box">
+                <div class="input-field">
+                    <i class='bx bxs-envelope'></i>
+                    <input type="email" id="email" name="email" placeholder="E-Mail Address" required>
+                </div>
+            </div>
+
+            <!-- Password Input -->
+            <div class="input-box">
+                <div class="input-field">
+                    <i class='bx bxs-lock-alt'></i>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+            </div>
+
+            <!-- Error Message Display -->
+            <div id="error-message" style="color: red; display: none; text-align: center; margin-bottom: 10px;"></div>
+
+            <!-- Login Button -->
+            <button type="submit" class="btn">Login</button>
+
+            <!-- Divider -->
+            <p class="divider">or</p>
+
+            <!-- Google Login -->
+            <button type="button" class="social-btn google-btn" onclick="loginWithGoogle()">
+                <img src="https://i.ibb.co/xKK7QQ5G/google.png" alt="Google Logo">
+                Sign in with Google
+            </button>
+
+            <!-- LinkedIn Login -->
+            <button type="button" class="social-btn linkedin-btn" onclick="loginWithLinkedIn()">
+                <img src="https://i.ibb.co/mWbK8mZ/linkedin.png" alt="LinkedIn Logo">
+                Sign in with LinkedIn
+            </button>
+
+            <!-- Register Link -->
+            <div class="register-link">
+                <p>Don't have an account? <a href="register.html">Register</a></p>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const backendBaseUrl = "http://localhost:8080";
+
+        document.getElementById("login-form").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const errorMessage = document.getElementById("error-message");
+
+            fetch(`${backendBaseUrl}/api/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password }),
+                credentials: "include" // Include cookies (JSESSIONID)
+            })
+            .then(response => {
+                if (response.ok || response.redirected) {
+                    console.log("Login successful, redirecting to index.html");
+                    window.location.href = "index.html";
+
+                } else {
+                    return response.text().then(text => {
+                        throw new Error(text || "Login failed");
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Login error:", error.message);
+                errorMessage.textContent = error.message || "An error occurred during login.";
+                errorMessage.style.display = "block";
+            });
+        });
+
+        function loginWithGoogle() {
+            window.location.href = `${backendBaseUrl}/oauth2/authorization/google`;
+        }
+
+        function loginWithLinkedIn() {
+            window.location.href = `${backendBaseUrl}/oauth2/authorization/linkedin`;
+        }
+    </script>
+</body>
+</html>

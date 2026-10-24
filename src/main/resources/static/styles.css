@@ -1,0 +1,343 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #ffffff;
+    color: #333;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    padding: 15px 8%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.logo img {
+    height: 55px;
+}
+
+/* Navigation */
+.navbar nav ul {
+    display: flex;
+    list-style: none;
+}
+
+.navbar nav ul li {
+    margin: 0 15px;
+}
+
+.navbar nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+}
+.user-id {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-right: 10px;
+}
+
+.logout-btn {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.logout-btn:hover {
+    background: #cc0000;
+}
+
+
+/* Auth Section Styling */
+#auth-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+/* Button Styling */
+#auth-section button {
+    background: linear-gradient(135deg, #4CAF50, #2E8B57);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover Effect */
+#auth-section button:hover {
+    background: linear-gradient(135deg, #2E8B57, #4CAF50);
+    transform: translateY(-2px);
+}
+
+/* Logout Button Styling */
+#logout-btn {
+    background: linear-gradient(135deg, #FF4C4C, #D32F2F);
+}
+
+/* Hover Effect for Logout */
+#logout-btn:hover {
+    background: linear-gradient(135deg, #D32F2F, #FF4C4C);
+}
+
+/* User Display Styling */
+#user-display {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    background: #f1f1f1;
+    padding: 8px 12px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 60px 6% 10px; /* Reduced bottom padding */
+    background: #ffffff;
+    min-height: 100vh;
+}
+
+
+.hero-content {
+    max-width: 50%;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    color: #2c3e50;
+    margin-bottom: 35px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    margin-bottom: 30px;
+}
+
+.primary-btn {
+    display: inline-block;
+    padding: 20px 30px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 3px;
+    transition: 0.3s;
+}
+
+.primary-btn:hover {
+    background: #0056b3;
+}
+
+.ratings {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #555;
+}
+
+.ratings i {
+    color: #ffcc00;
+}
+
+/* Hero Image */
+.hero-image {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 50%;
+    overflow: hidden;
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    max-width: 600px;
+    object-fit: contain;
+}
+
+/* Features Section */
+.features {
+    text-align: center;
+    margin-top: -20px; /* Pulls the section closer */
+    padding: 40px 10% 80px; /* Reduced top padding */
+    background: #ffffff;
+}
+
+.features h2 {
+    font-size: 3.8rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-top: 0; /* Ensure no extra gap */
+    margin-bottom: 40px;
+    background-color: #6698FF; /* Adds the colored box */
+    padding: 10px 20px; /* Adds padding inside the box */
+    border-radius: 8px; /* Rounds the corners of the box */
+    display: inline-block; /* Makes the box fit the content width */
+}
+
+
+/* Feature Grid Layout */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Feature Box */
+.feature {
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+    gap: 15px;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Feature Icon */
+.feature img {
+    width: 40px;
+    height: 40px;
+}
+
+/* Feature Content */
+.feature-content {
+    flex: 1;
+}
+
+.feature-content h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1e1e1e;
+    margin-bottom: 5px;
+}
+
+.feature-content p {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+
+.resume-benefits {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.benefits-header {
+    margin-bottom: 3rem;
+}
+
+.benefits-header h2 {
+    font-size: 4rem;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.benefits-header h2 span {
+    text-decoration: underline;
+    text-decoration-color: #82E382;
+}
+
+.btn-template {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.5rem;
+    background-color: #4263EB;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 2rem;
+    transition: background 0.3s ease;
+}
+
+.btn-template:hover {
+    background-color: #2C4BCA;
+}
+
+.benefits-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.benefit-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.benefit-item i {
+    font-size: 3rem;
+    margin-bottom: 0; /* Reduced further */
+}
+
+.benefit-item h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0; /* Even tighter */
+}
+
+.benefit-item p {
+    font-size: 1rem;
+    max-width: 300px;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+    .benefits-content {
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 0; /* Minimal spacing */
+    }
+
+    .benefit-item {
+        max-width: 30%;
+    }
+
+    .benefits-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .benefits-header h2 {
+        text-align: left;
+    }
+
+    .btn-template {
+        margin-top: 0; /* Much tighter spacing */
+    }
+}

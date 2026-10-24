@@ -1,0 +1,92 @@
+body {
+    font-family: 'Poppins', sans-serif; /* Modern font for better look */
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background for a cleaner look */
+}
+
+header {
+    display: flex;
+    justify-content: space-between; /* Space out heading and home button */
+    align-items: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 3rem; /* Larger and bolder heading */
+    font-weight: 800; /* Extra bold for better emphasis */
+    color: white; /* White text for contrast */
+    background: linear-gradient(135deg, #4A90E2, #357ABD); /* Gradient background */
+    padding: 20px 40px; /* Padding for box effect */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+
+.back-btn {
+    text-decoration: none;
+    padding: 10px 20px;
+    font-weight: 600;
+    background-color: #4A90E2; /* Blue background */
+    color: white; /* White text */
+    border-radius: 8px; /* Rounded corners */
+    transition: background 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: #357ABD; /* Darker shade on hover */
+}
+
+.templates-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 templates in a row */
+    gap: 40px; /* Increased spacing for better layout */
+    margin-top: 30px;
+    justify-items: center; /* Center align the items */
+}
+
+.template-card {
+    border: none; /* Cleaner card design */
+    border-radius: 16px; /* Rounded corners */
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    width: 450px; /* Larger card for better visuals */
+    background: white; /* White background for contrast */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Deeper shadow for a modern touch */
+    text-align: center; /* Center align all content */
+}
+
+.template-card img {
+    width: 300px; /* Larger image size */
+    height: 200px; /* Larger height */
+    object-fit: cover; /* Ensures image fits correctly */
+    margin-top: 20px; /* Space above the image */
+}
+
+.template-card:hover {
+    transform: translateY(-5px); /* Slight lift on hover */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+}
+
+h3 {
+    margin: 20px 0; /* Increased spacing for clarity */
+    font-size: 1.6rem; /* Larger text for better readability */
+    font-weight: 700; /* Bolder for importance */
+    color: #2c3e50; /* Darker color for better contrast */
+    text-align: center; /* Ensure title is centered */
+}
+
+button {
+    padding: 12px 24px;
+    font-size: 1rem;
+    background-color: #4A90E2; /* Consistent theme */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background-color: #357ABD; /* Darker on hover */
+}

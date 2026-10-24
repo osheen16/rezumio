@@ -1,0 +1,15 @@
+{
+  "name": "rezumio",
+  "version": "1.0.0",
+  "description": "A demo application for Rezumio project",
+  "main": "server.js",
+  "scripts": {
+    "test": "test command: echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "rezumio": "file:"
+  }
+}

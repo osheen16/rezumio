@@ -1,0 +1,152 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to right, #5CB3FF, #56A5EC);
+    padding: 20px; /* Added for better mobile spacing */
+}
+
+.wrapper {
+    width: 90%;
+    max-width: 400px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+/* Input Fields */
+.input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.input-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.input-field input {
+    width: 100%;
+    padding: 12px 40px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-field input:focus {
+    border-color: #56A5EC;
+}
+
+.input-field i {
+    position: absolute;
+    left: 15px;
+    font-size: 18px;
+    color: #888;
+}
+
+/* Checkbox Label */
+label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin: 10px 0;
+    gap: 8px; /* Ensures spacing between checkbox and text */
+}
+
+/* Ensure Checkbox is Clickable */
+label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+/* Register Button */
+.btn {
+    width: 100%;
+    padding: 12px;
+    background: #B7CEEC;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #56A5EC;
+}
+
+/* Register Link */
+.register-link {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.register-link a {
+    color: #56A5EC;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .wrapper {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    .input-field input {
+        font-size: 14px;
+        padding: 10px 35px;
+    }
+
+    .input-field i {
+        font-size: 16px;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .register-link {
+        font-size: 13px;
+    }
+
+    label {
+        font-size: 13px;
+        gap: 6px;
+    }
+}

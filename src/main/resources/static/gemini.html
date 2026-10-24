@@ -1,0 +1,651 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Rezumio Chatbot</title>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+   <style>
+* {
+   * {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+}
+
+
+body {
+   font-family: 'Inter', 'Roboto', sans-serif; /* Added Roboto as fallback */
+   background: linear-gradient(135deg, #121212 0%, #1a1a1a 100%); /* Subtle gradient */
+   color: #e0e0e0;
+   padding: 40px 20px;
+   min-height: 100vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   line-height: 1.6;
+   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+   overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+
+body.light {
+   background: linear-gradient(135deg, #f5f7fa 0%, #e2e8f0 100%);
+   color: #2d3748;
+}
+
+
+h1 {
+   font-size: 3em;
+   font-weight: 800;
+   margin-bottom: 35px;
+   color: #48bb78;
+   letter-spacing: -0.03em;
+   text-align: center;
+   background: linear-gradient(90deg, #48bb78, #68d391, #48bb78);
+   background-size: 200% 100%;
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+   animation: gradientShift 4s ease infinite; /* Animated gradient */
+   text-shadow: 0 2px 10px rgba(72, 187, 120, 0.3);
+}
+
+
+@keyframes gradientShift {
+   0% { background-position: 0% 50%; }
+   50% { background-position: 100% 50%; }
+   100% { background-position: 0% 50%; }
+}
+
+
+h2 {
+   font-size: 1.8em;
+   font-weight: 700;
+   margin: 35px 0 20px;
+   color: #a0aec0;
+   position: relative;
+   overflow: hidden;
+}
+
+
+h2::after {
+   content: '';
+   position: absolute;
+   bottom: -4px;
+   left: 0;
+   width: 50px;
+   height: 3px;
+   background: #48bb78;
+   border-radius: 2px;
+   transition: width 0.3s ease;
+}
+
+
+h2:hover::after {
+   width: 100%;
+}
+
+
+body.light h2 {
+   color: #4a5568;
+}
+
+
+.container {
+   background: rgba(31, 31, 31, 0.85); /* Glassmorphism effect */
+   backdrop-filter: blur(10px); /* Subtle blur */
+   padding: 40px;
+   border-radius: 20px;
+   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), inset 0 0 1px rgba(255, 255, 255, 0.1);
+   width: 100%;
+   max-width: 850px;
+   max-height: 85vh;
+   overflow-y: auto;
+   transition: all 0.4s ease;
+   border: 1px solid rgba(72, 187, 120, 0.2);
+}
+
+
+body.light .container {
+   background: rgba(255, 255, 255, 0.9);
+   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15), inset 0 0 1px rgba(0, 0, 0, 0.05);
+   border: 1px solid rgba(72, 187, 120, 0.1);
+}
+
+
+input[type="text"], select, textarea {
+   padding: 14px 16px;
+   margin: 12px 0;
+   width: 100%;
+   max-width: 450px;
+   border: 2px solid #48bb78;
+   border-radius: 10px;
+   background: rgba(45, 45, 45, 0.7);
+   color: #e0e0e0;
+   font-size: 1em;
+   font-weight: 500;
+   transition: all 0.3s ease;
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+body.light input[type="text"], body.light select, body.light textarea {
+   background: rgba(237, 242, 247, 0.9);
+   color: #2d3748;
+   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+
+input[type="text"]:focus, select:focus, textarea:focus {
+   border-color: #68d391;
+   background: rgba(58, 58, 58, 0.9);
+   box-shadow: 0 0 12px rgba(72, 187, 120, 0.5);
+   outline: none;
+   transform: scale(1.02); /* Subtle scale on focus */
+}
+
+
+body.light input[type="text"]:focus, body.light select:focus, body.light textarea:focus {
+   background: #ffffff;
+}
+
+
+button {
+   padding: 12px 30px;
+   background: linear-gradient(45deg, #48bb78, #68d391);
+   color: #fff;
+   border: none;
+   border-radius: 10px;
+   cursor: pointer;
+   font-size: 1em;
+   font-weight: 700;
+   text-transform: uppercase;
+   letter-spacing: 0.06em;
+   transition: all 0.3s ease;
+   position: relative;
+   overflow: hidden;
+   box-shadow: 0 6px 20px rgba(72, 187, 120, 0.3);
+}
+
+
+button::before {
+   content: '';
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   width: 0;
+   height: 0;
+   background: rgba(255, 255, 255, 0.2);
+   border-radius: 50%;
+   transform: translate(-50%, -50%);
+   transition: width 0.6s ease, height 0.6s ease;
+}
+
+
+button:hover::before {
+   width: 300px;
+   height: 300px;
+}
+
+
+button:hover {
+   transform: translateY(-3px) scale(1.02);
+   box-shadow: 0 8px 25px rgba(72, 187, 120, 0.5);
+}
+
+
+button[title]:hover:after {
+   content: attr(title);
+   position: absolute;
+   bottom: 130%;
+   left: 50%;
+   transform: translateX(-50%);
+   background: rgba(45, 55, 72, 0.9);
+   backdrop-filter: blur(5px);
+   color: #fff;
+   padding: 8px 14px;
+   border-radius: 8px;
+   font-size: 0.9em;
+   white-space: nowrap;
+   z-index: 10;
+   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+body.light button[title]:hover:after {
+   background: rgba(74, 85, 104, 0.9);
+}
+
+
+.button-group {
+   display: flex;
+   justify-content: center;
+   gap: 20px;
+   flex-wrap: wrap;
+   margin: 20px 0;
+}
+
+
+#summaryOutput, #chatOutput, #feedbackMessage {
+   margin-top: 25px;
+   padding: 20px;
+   background: rgba(45, 45, 45, 0.7);
+   backdrop-filter: blur(8px);
+   border-radius: 12px;
+   min-height: 120px;
+   max-height: 200px;
+   overflow-y: auto;
+   border: 1px solid rgba(72, 187, 120, 0.3);
+   position: relative;
+   transition: all 0.3s ease;
+   font-size: 0.95em;
+   line-height: 1.7;
+   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+body.light #summaryOutput, body.light #chatOutput, body.light #feedbackMessage {
+   background: rgba(237, 242, 247, 0.9);
+   border-color: rgba(226, 232, 240, 0.5);
+}
+
+
+#summaryText, #chatOutput div {
+   margin: 10px 0;
+   padding: 10px;
+   border-radius: 8px;
+   transition: background 0.3s ease;
+}
+
+
+#chatOutput div:nth-child(odd) {
+   background: rgba(58, 58, 58, 0.8);
+}
+
+
+body.light #chatOutput div:nth-child(odd) {
+   background: rgba(226, 232, 240, 0.8);
+}
+
+
+footer {
+   margin-top: 50px;
+   font-size: 0.9em;
+   color: #718096;
+   text-align: center;
+   padding: 20px 0;
+   font-style: italic;
+   text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+body.light footer {
+   color: #4a5568;
+   text-shadow: none;
+}
+
+
+.loading {
+   display: none;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   border: 6px solid #718096;
+   border-top: 6px solid #48bb78;
+   border-radius: 50%;
+   width: 45px;
+   height: 45px;
+   animation: spin 0.8s ease-in-out infinite;
+   box-shadow: 0 0 10px rgba(72, 187, 120, 0.3);
+}
+
+
+@keyframes spin {
+   0% { transform: translate(-50%, -50%) rotate(0deg); }
+   100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+
+#themeToggle {
+   position: fixed;
+   top: 20px;
+   right: 20px;
+   padding: 12px 24px;
+   background: linear-gradient(45deg, #48bb78, #68d391);
+   color: #fff;
+   border-radius: 10px;
+   font-weight: 700;
+   text-transform: uppercase;
+   transition: all 0.3s ease;
+   box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
+}
+
+
+#themeToggle:hover {
+   background: linear-gradient(45deg, #68d391, #48bb78);
+   transform: translateY(-2px) scale(1.05);
+   box-shadow: 0 6px 20px rgba(72, 187, 120, 0.5);
+}
+
+
+#charCount {
+   color: #48bb78;
+   font-size: 0.9em;
+   margin: 5px 0;
+   font-weight: 500;
+   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+
+body.light #charCount {
+   color: #2d3748;
+   text-shadow: none;
+}
+
+
+@media (max-width: 600px) {
+   body {
+       padding: 20px 10px;
+       background: #121212; /* Reset gradient for small screens */
+   }
+   body.light {
+       background: #f5f7fa;
+   }
+   h1 {
+       font-size: 2.4em;
+   }
+   h2 {
+       font-size: 1.5em;
+   }
+   .container {
+       padding: 25px;
+       max-height: 75vh;
+       border-radius: 15px;
+   }
+   input[type="text"], select, textarea {
+       max-width: 100%;
+       padding: 12px;
+       border-radius: 8px;
+   }
+   button {
+       padding: 10px 20px;
+       font-size: 0.9em;
+       border-radius: 8px;
+   }
+   #themeToggle {
+       top: 15px;
+       right: 15px;
+       padding: 10px 18px;
+   }
+   #summaryOutput, #chatOutput, #feedbackMessage {
+       max-height: 150px;
+       border-radius: 10px;
+   }
+}
+}
+   </style>
+</head>
+<body>
+   <button id="themeToggle" onclick="toggleTheme()" title="Switch between light and dark mode">Toggle Theme</button>
+   <div class="container">
+       <h1>Rezumio Chatbot</h1>
+       <h2>Generate Resume Summary</h2>
+       <select id="jobTitleSelect" onchange="document.getElementById('jobTitle').value = this.value">
+           <option value="">Select a Job Title</option>
+           <option value="Data Engineer">Data Engineer</option>
+           <option value="Full-Stack Developer">Full-Stack Developer</option>
+           <option value="Mobile App Developer">Mobile App Developer</option>
+           <option value="Machine Learning Engineer">Machine Learning Engineer</option>
+           <option value="DevOps Engineer">DevOps Engineer</option>
+           <option value="Cloud Architect">Cloud Architect</option>
+           <option value="Backend Developer">Backend Developer</option>
+           <option value="Frontend Developer">Frontend Developer</option>
+       </select>
+       <input type="text" id="jobTitle" placeholder="Or enter a custom job title">
+       <div class="button-group">
+           <button onclick="generateSummary()" title="Generate a resume summary for the selected job title">Generate</button>
+           <button onclick="resetForm()" title="Clear the job title and summary">Reset</button>
+       </div>
+       <div id="summaryOutput">
+           <div class="loading" id="summaryLoading"></div>
+           <div id="summaryText"></div>
+       </div>
+       <div class="button-group">
+           <button onclick="copySummary()" title="Copy the generated summary to your clipboard">Copy to Clipboard</button>
+           <button onclick="downloadSummary()" title="Download the summary as a text file">Download</button>
+       </div>
+       <h2>Chat with Gemini</h2>
+       <input type="text" id="chatInput" placeholder="Send a message" onkeypress="if(event.key === 'Enter') sendChatMessage()" oninput="updateCharCount()">
+       <div><span id="charCount">0</span>/200 characters</div>
+       <div class="button-group">
+           <button onclick="sendChatMessage()" title="Send your message to Gemini">➢</button>
+           <button onclick="clearChat()" title="Clear the chat history">Clear Chat</button>
+       </div>
+       <div id="chatOutput">
+           <div class="loading" id="chatLoading"></div>
+       </div>
+       <h2>Feedback</h2>
+       <select id="rating">
+           <option value="5">5 - Excellent</option>
+           <option value="4">4 - Good</option>
+           <option value="3">3 - Average</option>
+           <option value="2">2 - Poor</option>
+           <option value="1">1 - Terrible</option>
+       </select>
+       <textarea id="feedbackComment" placeholder="Your feedback (optional)" rows="3"></textarea>
+       <div class="button-group">
+           <button onclick="submitFeedback()" title="Submit your feedback">Submit Feedback</button>
+       </div>
+       <div id="feedbackMessage"></div>
+   </div>
+   <footer>
+       A Gemini-enhanced resume builder, developed by Sajeed Ballur and Sinivas P B, using HTML, CSS, JavaScript, and Spring Boot with Gemini API integration.
+   </footer>
+   <script>
+       async function generateSummary() {
+    const jobTitle = document.getElementById('jobTitle').value.trim();
+    const summaryOutput = document.getElementById('summaryText');
+    const summaryLoading = document.getElementById('summaryLoading');
+    if (!jobTitle) {
+        summaryOutput.textContent = 'Please enter a valid job title.';
+        return;
+    }
+    if (jobTitle.length < 3) {
+        summaryOutput.textContent = 'Job title must be at least 3 characters long.';
+        return;
+    }
+    summaryOutput.textContent = '';
+    summaryLoading.style.display = 'block';
+    try {
+        const response = await fetch(`http://localhost:8080/api/resume/summary?jobTitle=${encodeURIComponent(jobTitle)}`);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const summary = await response.text();
+        summaryOutput.textContent = summary;
+    } catch (error) {
+        console.error(error);
+        summaryOutput.textContent = 'Error generating summary: ' + error.message;
+    } finally {
+        summaryLoading.style.display = 'none';
+    }
+}
+
+async function sendChatMessage() {
+    const chatInput = document.getElementById('chatInput');
+    const message = chatInput.value.trim();
+    const chatOutput = document.getElementById('chatOutput');
+    const chatLoading = document.getElementById('chatLoading');
+    if (!message) {
+        const errorMessage = document.createElement('div');
+        errorMessage.textContent = 'Please enter a message.';
+        chatOutput.appendChild(errorMessage);
+        chatOutput.scrollTop = chatOutput.scrollHeight;
+        saveChatHistory();
+        return;
+    }
+    if (message.length > 200) {
+        const errorMessage = document.createElement('div');
+        errorMessage.textContent = 'Message is too long (max 200 characters).';
+        chatOutput.appendChild(errorMessage);
+        chatOutput.scrollTop = chatOutput.scrollHeight;
+        saveChatHistory();
+        return;
+    }
+    const timestamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const userMessage = document.createElement('div');
+    userMessage.textContent = `You (${timestamp}): ${message}`;
+    chatOutput.appendChild(userMessage);
+    chatInput.value = '';
+    chatOutput.scrollTop = chatOutput.scrollHeight; // Fixed typo: removed '<'
+    saveChatHistory();
+    chatLoading.style.display = 'block';
+    try {
+        const response = await fetch('http://localhost:8080/api/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `message=${encodeURIComponent(message)}`
+        });
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const reply = await response.text();
+        const botMessage = document.createElement('div');
+        botMessage.textContent = `Gemini (${timestamp}): ${reply}`;
+        chatOutput.appendChild(botMessage);
+        chatOutput.scrollTop = chatOutput.scrollHeight;
+    } catch (error) {
+        console.error(error);
+        const errorMessage = document.createElement('div');
+        errorMessage.textContent = `Error: ${error.message}`;
+        chatOutput.appendChild(errorMessage);
+        chatOutput.scrollTop = chatOutput.scrollHeight;
+    } finally {
+        chatLoading.style.display = 'none';
+        saveChatHistory();
+    }
+}
+
+
+       function clearChat() {
+           const chatOutput = document.getElementById('chatOutput');
+           chatOutput.innerHTML = '<div class="loading" id="chatLoading"></div>';
+           localStorage.removeItem('chatHistory');
+       }
+
+
+       function saveChatHistory() {
+           const chatOutput = document.getElementById('chatOutput');
+           const messages = Array.from(chatOutput.children)
+               .filter(child => child.id !== 'chatLoading')
+               .map(child => child.textContent);
+           localStorage.setItem('chatHistory', JSON.stringify(messages));
+       }
+
+
+       function loadChatHistory() {
+           const chatOutput = document.getElementById('chatOutput');
+           const savedMessages = localStorage.getItem('chatHistory');
+           if (savedMessages) {
+               const messages = JSON.parse(savedMessages);
+               messages.forEach(message => {
+                   const messageDiv = document.createElement('div');
+                   messageDiv.textContent = message;
+                   chatOutput.appendChild(messageDiv);
+               });
+               chatOutput.scrollTop = chatOutput.scrollHeight;
+           }
+       }
+
+
+       function copySummary() {
+           const summaryText = document.getElementById('summaryText').textContent;
+           if (!summaryText || summaryText.includes('Please enter') || summaryText.includes('Error')) {
+               alert('No summary to copy. Please generate a summary first.');
+               return;
+           }
+           navigator.clipboard.writeText(summaryText).then(() => {
+               alert('Summary copied to clipboard!');
+           }).catch(err => {
+               console.error('Failed to copy: ', err);
+               alert('Failed to copy summary. Please try again.');
+           });
+       }
+
+
+       function downloadSummary() {
+           const summaryText = document.getElementById('summaryText').textContent;
+           if (!summaryText || summaryText.includes('Please enter') || summaryText.includes('Error')) {
+               alert('No summary to download. Please generate a summary first.');
+               return;
+           }
+           const blob = new Blob([summaryText], { type: 'text/plain' });
+           const url = window.URL.createObjectURL(blob);
+           const a = document.createElement('a');
+           a.href = url;
+           a.download = 'resume_summary.txt';
+           document.body.appendChild(a);
+           a.click();
+           document.body.removeChild(a);
+           window.URL.revokeObjectURL(url);
+       }
+
+
+       function resetForm() {
+           document.getElementById('jobTitle').value = '';
+           document.getElementById('jobTitleSelect').value = '';
+           document.getElementById('summaryText').textContent = '';
+       }
+
+
+       function toggleTheme() {
+           const body = document.body;
+           body.classList.toggle('light');
+           const themeToggle = document.getElementById('themeToggle');
+           themeToggle.textContent = body.classList.contains('light') ? 'Dark Mode' : 'Light Mode';
+           updateCharCount();
+       }
+
+
+       function updateCharCount() {
+           const chatInput = document.getElementById('chatInput');
+           const charCount = document.getElementById('charCount');
+           const length = chatInput.value.length;
+           charCount.textContent = length;
+           if (length > 200) {
+               charCount.style.color = 'red';
+           } else {
+               charCount.style.color = document.body.classList.contains('light') ? '#333' : '#4CAF50';
+           }
+       }
+
+
+       async function submitFeedback() {
+           const rating = document.getElementById('rating').value;
+           const comment = document.getElementById('feedbackComment').value.trim();
+           const feedbackMessage = document.getElementById('feedbackMessage');
+           feedbackMessage.textContent = 'Submitting...';
+           try {
+               const response = await fetch('/api/feedback', {
+                   method: 'POST',
+                   headers: { 'Content-Type': 'application/json' },
+                   body: JSON.stringify({ rating, comment })
+               });
+               if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+               feedbackMessage.textContent = 'Thank you for your feedback!';
+               document.getElementById('feedbackComment').value = '';
+               document.getElementById('rating').value = '5';
+           } catch (error) {
+               console.error(error);
+               feedbackMessage.textContent = 'Error submitting feedback: ' + error.message;
+           }
+       }
+
+
+       document.addEventListener('DOMContentLoaded', () => {
+           document.getElementById('themeToggle').textContent = 'Light Mode';
+           updateCharCount();
+           loadChatHistory();
+       });
+   </script>
+</body>
+</html> 

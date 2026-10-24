@@ -1,0 +1,34 @@
+target/
+node_modules/
+.DS_Store
+.idea/
+*.iml
+.env
+.env.*
+!.env.example
+*.log
+
+# Google credentials and service-account keys
+gen-lang-client-*.json
+*service-account*.json
+credentials*.json
+
+# Local configuration and database files
+application-local.properties
+application-local.yml
+*.sql
+*.db
+*.sqlite
+
+
+/src/main/resources/application.properties
+    
+.git-corrupt-backup/
+src/main/resources/application.properties
+gen-lang-client-*.json/
+*service-account*.json
+credentials*.json
+
+.git-corrupt-backup/
+tempCodeRunnerFile.xml
+HELP.md

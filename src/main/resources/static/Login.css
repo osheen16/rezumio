@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to right, #5CB3FF, #56A5EC);
+    padding: 20px;
+}
+
+/* Card-like Wrapper */
+.wrapper {
+    width: 90%;
+    max-width: 400px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Title */
+h1 {
+    margin-bottom: 15px;
+    font-size: 24px;
+    text-align: center;
+}
+
+/* Input Fields */
+.input-box {
+    margin-bottom: 15px;
+}
+
+.input-field {
+    display: flex;
+    align-items: center;
+    background: #f2f2f2;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.input-field i {
+    margin-right: 10px;
+    color: #555;
+}
+
+input {
+    border: none;
+    background: none;
+    outline: none;
+    width: 100%;
+    font-size: 14px;
+}
+
+/* Login Button */
+.btn {
+    background: #007bff;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background: #0056b3;
+}
+
+/* Divider */
+.divider {
+    margin: 15px 0;
+    font-weight: bold;
+    position: relative;
+    text-align: center;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background: #ddd;
+}
+
+.divider::before {
+    left: 0;
+}
+
+.divider::after {
+    right: 0;
+}
+
+/* Social Login Buttons */
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.google-btn {
+    background: white;
+    border: 1px solid #db4437;
+    color: #db4437;
+}
+
+.linkedin-btn {
+    background: white;
+    color:#005582;
+    border: 1px solid #005582;
+}
+
+.google-btn:hover {
+    background: #db4437;
+    color: white;
+}
+
+.linkedin-btn:hover {
+    background: #5b93b2;
+}
+
+/* Small logo images */
+.social-btn img {
+    width: 14px; /* Even smaller logo size */
+    height: 14px;
+    margin-right: 6px; /* Adjusted spacing */
+}
+
+
+/* Register Link */
+.register-link {
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.register-link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
